@@ -1,8 +1,8 @@
 ##GIVEN STEPS
 Given /^I go to the "(.*)" page$/ do |page|
   @browser.goto(page)
-  sleep 1
-  puts button_by_id_exists("BUTTON_ID")
+  #sleep 1
+  #puts button_by_id_exists("BUTTON_ID")
 end
 
 
