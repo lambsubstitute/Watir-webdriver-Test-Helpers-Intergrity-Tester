@@ -15,6 +15,7 @@ end
 
 #clicks the link with class
 def link_by_class_click(class_name)
+  link_by_class(class_name).focus
   link_by_class(class_name).click
 end
 
@@ -42,6 +43,7 @@ end
 
 #clikc the link with id
 def link_by_id_click(link_id)
+  link_by_id(link_id).focus
   link_by_id(link_id).click
 end
 
@@ -69,6 +71,7 @@ end
 
 #click the link with text
 def link_by_text_click(link_text)
+  link_by_text(link_text).focus
   link_by_text(link_text).click
 end
 
@@ -91,6 +94,7 @@ end
 
 #click the link by href
 def link_by_href_click(link_href)
+  link_by_href(link_href).focus
   link_by_href(link_href).click
 end
 
