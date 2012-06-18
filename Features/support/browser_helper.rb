@@ -250,48 +250,10 @@ end
 
 
 
-## methods for working with divs ##
-# get a div by class, returns div object
-def div_by_class(class_name)
-  return @browser.div(:class, cuke_class(class_name))
-end
-
-# check if div exists by class, returns true or false
-def div_by_class_exists(class_name)
-  return div_by_class(class_name).exist?
-end
-
-# get a div by id, returns boolean
-def div_by_id_exists(id_name)
-  return div_by_id(id_name).exist?
-end
-
-# get a div by id, returns div object
-def div_by_id(id_name)
-  return @browser.div(:id, id_name)
-end
 
 
-## methods for working with headers
-# check if H2 header exists via its text, returns true or false
-def h2_with_text_exists(text)
-  return @browser.h2(:text, text).exist?
-end
 
-# check if H2 element exists via class, returns true or false
-def h2_with_class_exists(h2_class)
-  return @browser.h2(:class, cuke_class(h2_class)).exist?
-end
 
-# check if H3 header exists via its text, returns true or false
-def h3_with_text_exists(text)
-  return @browser.h3(:text, text).exist?
-end
-
-# check if H3 header exists via its class, returns true or false
-def h3_with_class_exists(h3_class)
-  return @browser.h3(:class, cuke_class(h3_class)).exist?
-end
 
 
 
@@ -334,31 +296,6 @@ end
 
 
 
-## methods for working with dropdowns
-# get a select by class, returns dropdown object
-def select_by_class(class_name)
-  @browser.select_list(:class, cuke_class(class_name))
-end
-
-# check dropdown exists, returns true or false
-def select_by_class_exists(class_name)
-  return select_by_class(class_name).exist?
-end
-
-def select_by_class_set_value(class_name, value)
-  select_by_class(class_name).select value
-end
-
-# get select list from id, returns select list object
-def select_by_id(id_name)
-  @browser.select_list(:id, id_name)
-end
-
-def select_by_id_set_value(id_name, value)
-  select_by_id(id_name).select value
-end
-
-
 ## methods for file field
 #find file find by id
 def filefield_by_id(filefield_id)
@@ -369,12 +306,6 @@ end
 def filefield_by_id_set_value(filefield_id, value)
   filefield_by_id(filefield_id).set value
 end
-
-
-
-
-
-
 
 
 

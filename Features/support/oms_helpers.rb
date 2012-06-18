@@ -1,20 +1,203 @@
+#Performance related data
+def performance
+  load_time = @browser.performance.summary[:response_time]
+  #puts "page load time - milliseconds"
+  #puts load_time #+ " - milliseconds"
+  time_to_first_byte = @browser.performance.summary[:time_to_first_byte]
+  #puts "time taken till first byte loaded - miliseconds"
+  #puts time_to_first_byte #+ " - milliseconds"
+end
+
+def getBackOrderNumber(order_number)
+  return_url = @browser.url
+  order_url = @base_url + "Orders/Home" + order_number
+  @browser.goto(order_url)
+  @browser.goto(return_url)
+end
+
+def refreshBrowser()
+  url = @browser.url
+  @browser.goto(url)
+end
+
+
+#validation check method for the edit customer page, checks to see you ahve an address when saving name changes or emails, which will stop the changes being saved
+def passedCustEditValidation()
+  if  @browser.span(:class, "field-validation-error").exist?
+    validation_check = @browser.span(:class, "field-validation-error").text
+    #puts validation_check
+    if validation_check.include? "The Street Address field is required." || "The Town field is required." || "The Postcode field is required."
+      step 'I set the street "example street"'
+      step 'I set the town "example town"'
+      step 'I set the postcode "example postcode"'
+      #step 'I set the country "'+ country +'"'
+      #step 'I set the phone number "'+ phone_number +'"'
+      @browser.button(:value, "Save Changes").click
+    end
+  end
+end
+
+def waitForOrderDiv()
+  count = 0
+  exit_flag = 0
+  ord_num = @order_number
+  ord_num = turnToString(ord_num)
+
+  while count < 30 && exit_flag == 0
+    if @browser.link(:text, ord_num).exist?
+      exit_flag = 1
+    else
+      sleep 1
+      url = @browser.url
+      @browser.goto(url)
+      count = count + 1
+    end
+  end
+end
+
+
+#create a unique surname
+def Createuniquename()
+  o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;
+  string  =  (0..12).map{ o[rand(o.length)]  }.join;
+  name = string
+  return name
+end
+
+#create a unique email, using the generated surname as the first half and a random 12 char generated string for the domain.
+def Createuniqueemail()
+  o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten;
+  string  =  (0..12).map{ o[rand(o.length)]  }.join;
+
+  email_address = @customer_name + "@" + string + ".com"
+  return email_address
+end
+
+
+def turnToInt(int)
+  int = int.to_i
+  return int
+end
+
+def turnToFloat(int)
+  int = int.to_f
+  return int
+end
+
+def turnToString(convertee)
+  convertee = convertee.to_s
+end
+
+
+#get todays day
+def GetDay()
+  today = Time.now
+  today = today.strftime('%a')
+  #puts today
+  return today
+end
+
+def getProductDetails(product_div)
+  order_details = []
+  order_details.push(product_div.td(:class, "unitprice").text)
+  order_details.push(product_div.td(:class, "rrpprice").text)
+  order_details.push(product_div.td(:class, "tradeprice").text)
+  order_details.push(product_div.td(:class, "quantity").text)
+  return order_details
+end
+
+def tradeDiscountPrice()
+  unit_price = @unit_price
+  rrp_price = @rrp_price
+  trade_price = @trade_price
+  unit_price = turnToFloat(unit_price)
+  trade_price = turnToFloat(trade_price)
+  discount = turnToFloat(@discount)
+  a = 0.01
+  x = 0.01
+  a = discount/100
+  x = a * trade_price
+  y =  x + trade_price
+  line_cost = y
+  discounted_price = unit_price - line_cost
+  discounted_price = discounted_price + 0.01
+
+  line_cost = line_cost.round(2)
+  discounted_price = discounted_price.round(2)
+  discount_prices = []
+  discount_prices.push(line_cost)
+  discount_prices.push(discounted_price)
+  return discount_prices
+end
+
+
+def LineDiscountPrice()
+  unit_price = @unit_price
+  rrp_price = @rrp_price
+  rrp_price = turnToFloat(rrp_price)
+  unit_price = turnToFloat(unit_price)
+  discount = turnToFloat(@discount)
+
+  rrp_price = rrp_price + 0.01
+  a = 0.01
+  discount_amount = 0.01
+
+  a = discount/100
+
+
+  discount_amount = a * rrp_price
+
+  line_cost =  unit_price - discount_amount
+  line_cost = line_cost + 0.01
+    line_cost = line_cost.round(2)
+  discount_amount = discount_amount.round(2)
+
+  discount_prices = []
+  discount_prices.push(line_cost)
+  discount_prices.push(discount_amount)
+  return discount_prices
+end
+
+
+def orderedDiscountPrice()
+  unit_price = @unit_price
+  rrp_price = @rrp_price
+  rrp_price = turnToFloat(rrp_price)
+  unit_price = turnToFloat(unit_price)
+  discount = turnToFloat(@discount)
+
+  unit_price = unit_price + 0.01
+  a = 0.01
+  discount_amount = 0.01
+
+  a = discount/100
+
+
+  discount_amount = a * unit_price
+
+  line_cost =  unit_price - discount_amount
+  line_cost = line_cost + 0.01
+  line_cost = line_cost.round(2)
+  discount_amount = discount_amount.round(2)
+
+  discount_prices = []
+  discount_prices.push(line_cost)
+  discount_prices.push(discount_amount)
+  return discount_prices
+end
 
 # Gets a regular expression to do class matching with so you don't need to worry
 # about any other non-cuke class' being on an html element
 # e.g. @browser.link(:class, get_class_regex("cuke_add_button"))
 def cuke_class(target_class)
-  /(\b)#{target_class.gsub(' ','_')}(\b)/
+  #/(\b)cuke_#{target_class.gsub(' ','_')}(\b)/
 end
 
 
-##each of the class methods have a "cuke" method invoked. This method can be used to add the default classing when we
-## can get the developers to include these as a convention.
-
+#
 
 
 ##methods for working with labels
-
-##lable by
 # check if label exists by class, returns true or false
 def label_by_class_exists(label_class)
   return @browser.label(:class, cuke_class(label_class)).exist?
@@ -24,6 +207,8 @@ end
 def label_by_text_exists(label_text)
   return @browser.label(:text, label_text).exist?
 end
+
+
 
 
 
@@ -114,16 +299,9 @@ end
 ## methods for working with text
 # check if text exists in the page, returns true or false
 def text_exists(text)
-  return @browser.text.include? text  #<< not returning correct value, should not be using should in this circumstance  TODO: CHECK THIS WITH PROPER LINE ON FULL TEST SUITE
-                                            # return @browser.text.include? (text)
+  return @browser.text.should include (text)  #<< not returning correct value, should not be using should in this circumstance  TODO: CHECK THIS WITH PROPER LINE ON FULL TEST SUITE
+                                              # return @browser.text.include? (text)
 end
-
-def text_does_NOT_exists(text)
-  return ((@browser.text.include? text)== false) #<< not returning correct value, should not be using should in this circumstance  TODO: CHECK THIS WITH PROPER LINE ON FULL TEST SUITE
-                                    # return @browser.text.include? (text)
-end
-
-
 
 
 
@@ -180,10 +358,6 @@ def select_by_id_set_value(id_name, value)
   select_by_id(id_name).select value
 end
 
-def select_by_id_exists(id_name)
-  return select_by_id(id_name).exist?
-end
-
 
 ## methods for file field
 #find file find by id
@@ -195,6 +369,7 @@ end
 def filefield_by_id_set_value(filefield_id, value)
   filefield_by_id(filefield_id).set value
 end
+
 
 
 
@@ -248,9 +423,6 @@ def table_by_id_exists(table_id)
 end
 
 
-
-
-#todo eventually refactor all @browser calls to use these class elements finders - when worked out WTF they are doing
 
 # gets elements by class
 def elements_by_class(element_type, class_name)
