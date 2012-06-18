@@ -2,7 +2,7 @@ Feature: Example feature
 
 
   Background:
-    Given I go to the "file:///c:/projects/Ruby/Watir%20and%20cucumber/TestHelpers%20Intergrity%20Test/TestPages/LinkTest.html" page
+    Given I go to the "file:///C:/Projects/Ruby/Watir%20and%20cucumber/Watir-webdriver-Test-Helpers-Intergrity-Tester/TestPages/LinkTest.html" page
     #Given I go to the Link test page   # doest work :todo work out why it doesn not passthe fiole location correctly
 
 
