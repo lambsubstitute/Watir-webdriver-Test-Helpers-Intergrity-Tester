@@ -13,6 +13,7 @@ end
 ##THEN STEPS
 Then /^I should see the success link test page$/ do
   assert text_exists("SUCCESS PAGE")
+
 end
 
 

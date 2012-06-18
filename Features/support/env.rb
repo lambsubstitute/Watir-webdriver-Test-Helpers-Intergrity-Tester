@@ -14,9 +14,9 @@ browser = Watir::Browser.new :firefox, :profile => profile
 
 
 Before do
-  if LOCALURL = nil
-    require 'features/support/cucumber_settings'
-  end
+  #if @local_url = nil
+    #require 'features/support/cucumber_settings'
+ # end
 
  #ENV['BASEURL'] = LOCALURL + ":" + LOCALPORT + "/"
   #browser.speed = fast
