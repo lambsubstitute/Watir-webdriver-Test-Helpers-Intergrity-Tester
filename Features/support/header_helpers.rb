@@ -91,3 +91,28 @@ end
 def h3_by_id_exists(h_id)
   return h3_by_id(h_id).exist?
 end
+
+def h4_by_text(h_text)
+  return @browser.h4(:text, h_text)
+end
+
+# check if H2 header exists via its text, returns true or false
+def h4_by_text_exists(text)
+  return h4_by_text(text).exist?
+end
+
+def h4_by_class(h_class)
+  return @browser.h4(:class, h_class)
+end
+# check if H2 element exists via class, returns true or false
+def h4_by_class_exists(h_class)
+  return h4_by_class(h_class).exist?
+end
+
+def h4_by_id(h_id)
+  return @browser.h4(id, h_id)
+end
+# check if H2 element exists via class, returns true or false
+def h4_by_id_exists(h_id)
+  return h4_by_id(h_id).exist?
+end

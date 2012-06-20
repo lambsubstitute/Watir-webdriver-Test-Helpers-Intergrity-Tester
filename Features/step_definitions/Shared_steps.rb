@@ -51,11 +51,75 @@ When  /^I click the button with ID "(.*)"$/ do |button_id|
   button_by_id_click(button_id)
 end
 
+When /^I clear the checkbox with the class "(.*)"$/ do |cb_class|
+  checkbox_by_class_clear(cb_class)
+end
+
+When /^I clear the checkbox with the id "(.*)"$/ do |cb_id|
+  checkbox_by_id_clear(cb_id)
+end
+
+When /^I clear the checkbox with the value "(.*)"$/ do |id_value|
+  checkbox_by_value_clear(id_value)
+end
+
+
+When /^I check the checkbox with the class "(.*)"$/ do |cb_class|
+  checkbox_by_class_set(cb_class)
+end
+
+When /^I check the checkbox with the id "(.*)"$/ do |cb_id|
+  checkbox_by_id_set(cb_id)
+end
+
+When /^I check the checkbox with the value "(.*)"$/ do |id_value|
+  checkbox_by_set_clear(id_value)
+end
+
 
 
 
 
 ##THEN STEPS
+
+Then /^the checkbox with class "(.*)" is selected$/ do |cb_class|
+  assert checkbox_by_class_is_set(cb_class)
+end
+
+Then /^the checkbox with class "(.*)" is not selected$/ do |cb_class|
+  assert (checkbox_by_class_is_set(cb_class) == false)
+end
+
+
+Then /^the checkbox with id "(.*)" is selected$/ do |cb_id|
+  assert checkbox_by_id_is_set(cb_id)
+end
+
+Then /^the checkbox with id "(.*)" is not selected$/ do |cb_id|
+  assert (checkbox_by_id_is_set(cb_id) == false)
+end
+
+
+Then /^the checkbox with value "(.*)" is selected$/ do |cb_value|
+  assert checkbox_by_value_is_set(cb_value)
+end
+
+Then /^the checkbox with value "(.*)" is not selected$/ do |cb_value|
+  assert (checkbox_by_value_is_set(cb_value) == false)
+end
+
+Then /^I should see the checkbox with value "(.*)"$/ do |cb_value|
+  puts checkbox_by_value_exists(cb_value)
+  assert checkbox_by_value_exists(cb_value)
+end
+
+Then /^I should see the checkbox with id "(.*)"$/ do |cb_id|
+  assert checkbox_by_id_exists(cb_id)
+end
+
+Then /^I should see the checkbox with class "(.*)"$/ do |cb_class|
+  assert checkbox_by_class_exists(cb_class)
+end
 
 Then /^I should see the link with text "(.*)"$/ do |link_text|
   assert link_by_text_exists(link_text)

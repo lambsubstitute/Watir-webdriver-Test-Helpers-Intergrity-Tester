@@ -190,7 +190,7 @@ end
 # about any other non-cuke class' being on an html element
 # e.g. @browser.link(:class, get_class_regex("cuke_add_button"))
 def cuke_class(target_class)
-  #/(\b)cuke_#{target_class.gsub(' ','_')}(\b)/
+  /(\b)#{target_class.gsub('','')}(\b)/
 end
 
 

@@ -39,7 +39,17 @@ def div_by_id_get_text(id_name)
 end
 
 
+
 def div_by_text(div_text)
   return @browser.div(:text, div_text)
 end
 
+# get a div by id, returns boolean
+def div_by_text_exists(div_text)
+  return div_by_text(div_text).exist?
+end
+
+# ge the div with the text and click it
+def div_by_text_click(div_text)
+  div_by_text(div_text).click
+end
