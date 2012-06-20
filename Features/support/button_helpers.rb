@@ -76,7 +76,7 @@ end
 ##button by value methods
 ##button by value, returns the button object by the value
 def button_by_value(button_value)
-  return @browser.button(:value, button_value)
+  return @browser.button(:text, button_value)
 end
 
 #button_by value exists, returns true or false

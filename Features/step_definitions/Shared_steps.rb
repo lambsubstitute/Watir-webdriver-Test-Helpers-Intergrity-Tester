@@ -32,11 +32,15 @@ end
 
 
 When  /^I click the button with class "(.*)"$/ do |button_class|
-  button_by_class_click(button_class)
+  #button_by_class_click(button_class)
+
+  @browser.button(:class, button_class).click
 end
 
 When  /^I click the button with text "(.*)"$/ do |button_value|
-  button_by_value_click(button_value)
+ # button_by_value_click(button_value)
+
+  @browser.button(:text, button_value)
 end
 
 When  /^I click the button with value "(.*)"$/ do |button_value|
