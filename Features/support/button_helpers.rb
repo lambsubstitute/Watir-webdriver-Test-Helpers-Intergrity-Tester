@@ -15,7 +15,7 @@ end
 
 #button by class exists, returns true or false
 def button_by_class_exists(button_class)
-  return button_by_class(button_class)
+  return button_by_class(button_class).exist?
 end
 
 #click the button with class
