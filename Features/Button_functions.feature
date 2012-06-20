@@ -1,19 +1,22 @@
 Feature: This feature tests the button methods that are held in the browser_helper.rb.
 
   Background:
-    Given I go to the "file:///c:/projects/Ruby/Watir%20and%20cucumber/TestHelpers%20Intergrity%20Test/TestPages/LinkTest.html" page
+    Given I go to the "file:///C:/projects/Ruby/Watir%20and%20cucumber/Watir-webdriver-Test-Helpers-Intergrity-Tester/TestPages/LinkTest.html" page
 
 
 #CLICKING METHODS TEST
+  @button
 Scenario:I can click the button when giving the correct TEXT - button_by_text_click()
     When  I click the button with text "test_btn_value"
     Then I should see the success link test page
 
+    @button
 Scenario:I can click the button when given the correct CLASS - link_by_class_click()
     When I click the button with class "test_btn_class"
     Then I should see the success link test page
 
 #clicking a button by its element methods test
+  @button
 Scenario: Click on the button using its class - button_by_class_click()
     When  I click the button with value "test_btn_value"
     Then I should see the success link test page

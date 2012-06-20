@@ -16,25 +16,24 @@ browser = Watir::Browser.new :firefox, :profile => profile
 #browser = Watir::Browser.new :ie
 
 Before do
-  if LOCALURL == nil
-    require 'features/support/cucumber_settings'
-  end
+ if LOCALURL == nil
+   require 'features/support/cucumber_settings'
+end
 
-  ENV['@base_url'] = LOCALURL
-  ENV['@base_url2'] = LOCALADD
-  @base_url2 = LOCALADD
-  @base_url = LOCALURL
-  if ENV['ENVIRONMENT'] == "auto"
-    ENV['@base_url'] = AUTOURL
-    ENV['@base_url2'] = AUTOADD
-    @base_url = AUTOURL
-    @base_url2 = AUTOADD
-  end
+  #ENV['@base_url'] = LOCALURL
+  #ENV['@base_url2'] = LOCALADD
+  #@base_url2 = LOCALADD
+  #@base_url = LOCALURL
+  #if ENV['ENVIRONMENT'] == "auto"
+  #  ENV['@base_url'] = AUTOURL
+  #  ENV['@base_url2'] = AUTOADD
+   ## @base_url = AUTOURL
+   # @base_url2 = AUTOADD
+  #end
 
   @browser = browser
-  @browser.goto(ENV['@base_url'])
-  @master_timeout = MASTER_TIMEOUT
-  @results_table_timeout = RESULTS_TABLE_TIMEOUT
+  @browser.goto(LOCALURL)
+  #@results_table_timeout = RESULTS_TABLE_TIMEOUT
 end
 
 
