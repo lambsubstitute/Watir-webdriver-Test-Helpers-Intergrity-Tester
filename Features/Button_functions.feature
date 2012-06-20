@@ -1,31 +1,33 @@
+@automated
 Feature: This feature tests the button methods that are held in the browser_helper.rb.
 
   Background:
-    Given I go to the "file:///C:/projects/Ruby/Watir%20and%20cucumber/Watir-webdriver-Test-Helpers-Intergrity-Tester/TestPages/LinkTest.html" page
+    Given I go to the "http://localhost:81/LinkTest.html" page
 
 
 #CLICKING METHODS TEST
   @button
 Scenario:I can click the button when giving the correct TEXT - button_by_text_click()
-    When  I click the button with text "test_btn_value"
+    When  I click the button with text "valid_btn_value"
     Then I should see the success link test page
 
     @button
 Scenario:I can click the button when given the correct CLASS - link_by_class_click()
-    When I click the button with class "test_btn_class"
+    When I click the button with class "valid_btn_class"
     Then I should see the success link test page
 
 #clicking a button by its element methods test
   @button
-Scenario: Click on the button using its class - button_by_class_click()
-    When  I click the button with value "test_btn_value"
+Scenario: Click on the button using its value - button_by_class_click()
+    When  I click the button with value "valid_btn_value"
     Then I should see the success link test page
 
 Scenario: Click on the button using its ID - button_by_id_click()
-  When I click the button with ID "BUTTON_ID"
+  When I click the button with ID "valid_btn_id"
   Then I should see the success link test page
 
-  Scenario: Click on the button using its text - button_by_text_click()
+
+Scenario: Click on the button using its text - button_by_text_click()
 
 Scenario: Click on the button using its value - button_by_value_click()
 
@@ -35,8 +37,10 @@ Scenario: Click on the button using its name - button_by_name_click()
 
 #Checking a button exists by its element methods test
 Scenario: The button with the class exists - button_by_class_exists()
+   Then I should see the button with class "valid_btn_class"
 
 Scenario: The button with the class does NOT exists - button_by_class_exists()
+  Then I should not see the button with class "invalid_class"
 
 Scenario: The button with the ID exists - button_by_id_exists()
 

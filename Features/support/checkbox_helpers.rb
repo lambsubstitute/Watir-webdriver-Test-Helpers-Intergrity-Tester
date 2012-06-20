@@ -1,7 +1,7 @@
 ## methods for working with checkboxes
 # get checkbox by class, returns checkbox object
 def checkbox_by_class(checkbox_class)
-  return @browser.checkbox(:class, cuke_class(checkbox_class))
+  return @browser.checkbox(:class, checkbox_class)
 end
 
 # check checkbox with class exists, returns true or false
@@ -28,6 +28,7 @@ end
 ##checkbox by id methods
 # get checkbox by id, returns checkbox object
 def checkbox_by_id(checkbox_id)
+  browser = @browser
   return @browser.checkbox(:id, checkbox_id)
 end
 
@@ -55,12 +56,18 @@ end
 #checkbox by value methods
 # get check box by value, returns checkbox object
 def checkbox_by_value(checkbox_value)
-  return @browser.checkbox(:value, checkbox_value)
+  browser = @browser
+  puts browser.checkbox(:value, checkbox_value)
+  checkb =  browser.checkbox(:value, checkbox_value)
+  puts (checkb != nil ? checkb : "empty")
+  return checkb
 end
 
 #checkbox by value exists, returns true or false
 def checkbox_by_value_exists(checkbox_value)
-  return checkbox_by_value(checkbox_value).exist?
+  checkbox =  checkbox_by_value(checkbox_value)
+  puts checkbox
+  return checkbox_by_value(checkbox_value).exists?
 end
 
 # set check box by value

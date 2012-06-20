@@ -40,7 +40,7 @@ end
 When  /^I click the button with text "(.*)"$/ do |button_value|
  # button_by_value_click(button_value)
 
-  @browser.button(:text, button_value)
+  @browser.button(:value, button_value).click
 end
 
 When  /^I click the button with value "(.*)"$/ do |button_value|
@@ -73,7 +73,7 @@ When /^I check the checkbox with the id "(.*)"$/ do |cb_id|
 end
 
 When /^I check the checkbox with the value "(.*)"$/ do |id_value|
-  checkbox_by_set_clear(id_value)
+  checkbox_by_value_set(id_value)
 end
 
 
@@ -81,6 +81,31 @@ end
 
 
 ##THEN STEPS
+
+Then /^I should see the button with class "(.*)"$/ do |btn_class|
+  assert button_by_class_exists(btn_class)
+end
+
+  Then /^I should not see the button with class "(.*)"$/ do |btn_class|
+    puts button_by_class_exists(btn_class)
+    assert (button_by_class_exists(btn_class)==false)
+  end
+
+Then /^I should see the button with id "(.*)"$/ do |btn_id|
+  assert button_by_id_exists(btn_id)
+end
+
+Then /^I should not see the button with id "(.*)"$/ do |btn_id|
+  assert (button_by_id_exists(btn_id)==false)
+end
+
+Then /^I should see the button with value "(.*)"$/ do |btn_value|
+  assert button_by_value_exists(btn_value)
+end
+
+Then /^I should not see the button with value "(.*)"$/ do |btn_value|
+  assert (button_by_value_exists(btn_value)==false)
+end
 
 Then /^the checkbox with class "(.*)" is selected$/ do |cb_class|
   assert checkbox_by_class_is_set(cb_class)
@@ -109,7 +134,7 @@ Then /^the checkbox with value "(.*)" is not selected$/ do |cb_value|
 end
 
 Then /^I should see the checkbox with value "(.*)"$/ do |cb_value|
-  puts checkbox_by_value_exists(cb_value)
+  #puts checkbox_by_value_exists(cb_value)
   assert checkbox_by_value_exists(cb_value)
 end
 
@@ -119,6 +144,19 @@ end
 
 Then /^I should see the checkbox with class "(.*)"$/ do |cb_class|
   assert checkbox_by_class_exists(cb_class)
+end
+
+Then /^I should not see the checkbox with value "(.*)"$/ do |cb_value|
+  #puts checkbox_by_value_exists(cb_value)
+  assert (checkbox_by_value_exists(cb_value)==false)
+end
+
+Then /^I should not see the checkbox with id "(.*)"$/ do |cb_id|
+  assert (checkbox_by_id_exists(cb_id)==false)
+end
+
+Then /^I should not see the checkbox with class "(.*)"$/ do |cb_class|
+  assert (checkbox_by_class_exists(cb_class)==false)
 end
 
 Then /^I should see the link with text "(.*)"$/ do |link_text|

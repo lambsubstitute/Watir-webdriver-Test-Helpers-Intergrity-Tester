@@ -7,6 +7,7 @@ include Test::Unit::Assertions
 #require 'synchronize'
 #require 'debugger'
 #require 'gherkin'
+#require 'features/support/cucumber_settings'
 
 #config to run in firefox with clean profile
 profile = Selenium::WebDriver::Firefox::Profile.new
@@ -16,9 +17,9 @@ browser = Watir::Browser.new :firefox, :profile => profile
 #browser = Watir::Browser.new :ie
 
 Before do
- if LOCALURL == nil
-   require 'features/support/cucumber_settings'
-end
+
+   #require 'features/support/cucumber_settings'
+
 
   #ENV['@base_url'] = LOCALURL
   #ENV['@base_url2'] = LOCALADD
@@ -32,7 +33,6 @@ end
   #end
 
   @browser = browser
-  @browser.goto(LOCALURL)
   #@results_table_timeout = RESULTS_TABLE_TIMEOUT
 end
 
