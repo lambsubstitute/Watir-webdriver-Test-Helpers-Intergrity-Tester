@@ -60,3 +60,26 @@ end
 def textfield_by_name_exists(name)
   textfield_by_name(name)
 end
+
+
+#text field waiting helpers
+def link_by_class_wait(link_class)
+  link_by_class(link_class).wait_until_present(timeout=@master_timeout)
+end
+
+def link_by_text_wait(link_text)
+  link_by_text(link_text).wait_until_present(timeout=@master_timeout)
+end
+
+def link_by_id_wait(link_id)
+  link_by_id(link_id).wait_until_present(timeout=@master_timeout)
+end
+
+
+def button_by_value_wait(button_value)
+  button_by_value(button_value).wait_until_present(timeout=@master_timeout)
+end
+
+def textfield_by_id_wait(id)
+  textfield_by_id(id).wait_until_present(timeout=@master_timeout)
+end
