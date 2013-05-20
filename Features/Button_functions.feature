@@ -2,7 +2,7 @@
 Feature: This feature tests the button methods that are held in the browser_helper.rb.
 
   Background:
-    Given I go to the "http://localhost:81/LinkTest.html" page
+    Given I go to the "LinkTest.html" page
 
 
 #CLICKING METHODS TEST

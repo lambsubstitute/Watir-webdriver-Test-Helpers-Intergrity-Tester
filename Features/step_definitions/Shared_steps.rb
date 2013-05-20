@@ -1,6 +1,7 @@
 ##GIVEN STEPS
 Given /^I go to the "(.*)" page$/ do |page|
-  @browser.goto(page)
+  url = BASE_URL + page
+  @browser.goto(url)
   #sleep 1
   #puts button_by_id_exists("BUTTON_ID")
 end
@@ -27,6 +28,7 @@ When /^I click on the link with ID "(.*)"$/ do |link_id|
 end
 
 When /^I click on the link with href "(.*)"$/ do |link_href|
+  link_href = BASE_URL + link_href
   link_by_href_click(link_href)
 end
 
@@ -186,6 +188,7 @@ Then /^I should NOT see the link with ID "(.*)"$/ do |link_id|
 end
 
 Then /^I should see the link with HREF "(.*)"$/ do |link_href|
+  link_href = BASE_URL + link_href
   assert link_by_href_exists(link_href)
 end
 
@@ -214,11 +217,15 @@ Then /^I should NOT see the link ID "(.*)" display the text "(.*)"$/ do |link_id
 end
 
 Then /^I should see the link HREF "(.*)" display the text "(.*)"$/ do |link_href, text|
+  link_href = BASE_URL + link_href
   link_text = link_by_href_get_text(link_href)
   assert link_text == text
 end
 
 Then /^I should NOT see the link HREF "(.*)" display the text "(.*)"$/ do |link_href, text|
+  link_href = BASE_URL + link_href
   link_text = link_by_href_get_text(link_href)
-  assert((link_text == text)== false)
+  puts "link text found on the page:"
+  puts link_text
+  assert link_text != text
 end

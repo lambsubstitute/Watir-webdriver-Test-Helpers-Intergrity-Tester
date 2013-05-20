@@ -3,6 +3,7 @@ require 'watir-webdriver'
 require 'rubygems'
 require 'rspec/expectations'
 require 'watir-webdriver-performance'
+
 include Test::Unit::Assertions
 #require 'synchronize'
 #require 'debugger'
@@ -10,8 +11,8 @@ include Test::Unit::Assertions
 #require 'features/support/cucumber_settings'
 
 #config to run in firefox with clean profile
-profile = Selenium::WebDriver::Firefox::Profile.new
-browser = Watir::Browser.new :firefox, :profile => profile
+#profile = Selenium::WebDriver::Firefox::Profile.new
+#browser = Watir::Browser.new :firefox, :profile => profile
 
 #config to run ie - BEWARE THIS IS SLOW, ONLY REALLY GOOD FOR OVERNIGHT
 #browser = Watir::Browser.new :ie
@@ -32,13 +33,16 @@ Before do
    # @base_url2 = AUTOADD
   #end
 
-  @browser = browser
+  #@browser = browser
   #@results_table_timeout = RESULTS_TABLE_TIMEOUT
 end
 
 
 Before do |scenario|
   #browser.cookies.clear
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  browser = Watir::Browser.new :firefox, :profile => profile
+  @browser = browser
 end
 
 
@@ -49,11 +53,12 @@ After do |scenario|
     browser.driver.save_screenshot(screenshot)
     embed screenshot, 'image/png'
   end
+  @browser.close
 end
 
 
 at_exit do
-  #browser.close
+  browser.close
   #sendreport()
 end
 

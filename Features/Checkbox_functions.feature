@@ -3,7 +3,7 @@ Feature: This feature tests the checkbox methods that are held in the support/ch
 #By default all these tests hit chekcbox_by_class(), checkbox_by_id(), checkbox_by_value()
 
   Background:
-    Given I go to the "http://localhost:81/LinkTest.html" page
+    Given I go to the "LinkTest.html" page
 
 
   Scenario: This test will find the checkbox by its value and verify its existence to check a positive result
